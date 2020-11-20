@@ -45,27 +45,29 @@ def respond():
        Welcome to Translation bot, Enter the word to translate.
        """
 
-       word = str(input("Enter the word to Translate"))
+    #    word = str(input("Enter the word to Translate"))
        # send the welcoming message
+   else:
        bot.sendMessage(chat_id=chat_id, text=bot_welcome, reply_to_message_id=msg_id)
 
        word = update.message.text.encode('utf-8').decode()
        tw=translate(word)
        bot.sendMessage(chat_id=chat_id, text=tw, reply_to_message_id=msg_id)
+    
 
 
-   else:
-       try:
-           # clear the message we got from any non alphabets
-           text = re.sub(r"\W", "_", text)
-           # create the api link for the avatar based on http://avatars.adorable.io/
-           welcome = "Welcome to Translation bot, Enter the following commands to start translation"
-           # reply with a photo to the name the user sent,
-           # note that you can send photos by url and telegram will fetch it for you
-           bot.sendPhoto(chat_id=chat_id, text=welcome, reply_to_message_id=msg_id)
-       except Exception:
-           # if things went wrong
-           bot.sendMessage(chat_id=chat_id, text="There was a problem in the command you used, please enter correct command", reply_to_message_id=msg_id)
+#    else:
+#        try:
+#            # clear the message we got from any non alphabets
+#            text = re.sub(r"\W", "_", text)
+#            # create the api link for the avatar based on http://avatars.adorable.io/
+#            welcome = "Welcome to Translation bot, Enter the following commands to start translation"
+#            # reply with a photo to the name the user sent,
+#            # note that you can send photos by url and telegram will fetch it for you
+#            bot.sendPhoto(chat_id=chat_id, text=welcome, reply_to_message_id=msg_id)
+#        except Exception:
+#            # if things went wrong
+#            bot.sendMessage(chat_id=chat_id, text="There was a problem in the command you used, please enter correct command", reply_to_message_id=msg_id)
 
    return 'ok'
 

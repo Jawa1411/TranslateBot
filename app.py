@@ -12,17 +12,17 @@ bot = telegram.Bot(token=TOKEN)
 
 app = Flask(__name__)
 
-# def translate(word):
-#     driver = webdriver.Firefox()
-#     driver.get("http://dictionary.tamilcube.com")
+def translate(word):
+    driver = webdriver.Firefox()
+    driver.get("http://dictionary.tamilcube.com")
 
-#     search_box = driver.find_element_by_id("name")
-#     search_box.send_keys(word)
-#     search_button = driver.find_element_by_id("Submit1")
-#     search_button.click()
+    search_box = driver.find_element_by_id("name")
+    search_box.send_keys(word)
+    search_button = driver.find_element_by_id("Submit1")
+    search_button.click()
 
-#     transword = driver.find_element_by_xpath("/html/body/div[3]/table/tbody/tr/td[2]/form/table[2]/tbody/tr/td[1]/div/table/tbody/tr[2]/td").text
-#     return transword
+    transword = driver.find_element_by_xpath("/html/body/div[3]/table/tbody/tr/td[2]/form/table[2]/tbody/tr/td[1]/div/table/tbody/tr[2]/td").text
+    return transword
 @app.route('/{}'.format(TOKEN), methods=['POST'])
 def respond():
        # retrieve the message in JSON and then transform it to Telegram object
@@ -45,13 +45,13 @@ def respond():
        Welcome to Translation bot, Enter the word to translate.
        """
 
-    #    word = str(input("Enter the word to Translate"))
+       word = str(input("Enter the word to Translate"))
        # send the welcoming message
        bot.sendMessage(chat_id=chat_id, text=bot_welcome, reply_to_message_id=msg_id)
 
-    #    word = update.message.text.encode('utf-8').decode()
-    #    tw=translate(word)
-    #    bot.sendMessage(chat_id=chat_id, text=tw, reply_to_message_id=msg_id)
+       word = update.message.text.encode('utf-8').decode()
+       tw=translate(word)
+       bot.sendMessage(chat_id=chat_id, text=tw, reply_to_message_id=msg_id)
 
 
    else:

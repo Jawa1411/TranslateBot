@@ -49,7 +49,7 @@ def respond():
        # send the welcoming message
        bot.sendMessage(chat_id=chat_id, text=bot_welcome, reply_to_message_id=msg_id)
 
-       word = update.message.text.encode('utf-8').decode()
+    #    word = update.message.text.encode('utf-8').decode()
     #    tw=translate(word)
     #    bot.sendMessage(chat_id=chat_id, text=tw, reply_to_message_id=msg_id)
 

@@ -23,7 +23,7 @@ app = Flask(__name__)
 
 #     transword = driver.find_element_by_xpath("/html/body/div[3]/table/tbody/tr/td[2]/form/table[2]/tbody/tr/td[1]/div/table/tbody/tr[2]/td").text
 #     return transword
-
+@app.route('/{}'.format(TOKEN), methods=['POST'])
 def respond():
        # retrieve the message in JSON and then transform it to Telegram object
    update = telegram.Update.de_json(request.get_json(force=True), bot)

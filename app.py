@@ -21,7 +21,7 @@ def translate(word):
     chrome_options.binary_location = GOOGLE_CHROME_PATH
 
     driver = webdriver.Chrome(execution_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
-    # driver = webdriver.Firefox()
+    
     driver.get("http://dictionary.tamilcube.com")
 
     search_box = driver.find_element_by_id("name")

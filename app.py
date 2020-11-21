@@ -14,8 +14,8 @@ bot = telegram.Bot(token=TOKEN)
 app = Flask(__name__)
 
 def translate(word):
-    # firefox_binary = FirefoxBinary('/usr/local/bin/geckodriver')
-    driver = webdriver.Firefox(firefox_binary=FirefoxBinary('/usr/local/bin/geckodriver'))
+    firefox_binary = FirefoxBinary('/usr/bin/firefox/')
+    driver = webdriver.Firefox(firefox_binary=firefox_binary)
     # driver = webdriver.Firefox()
     driver.get("http://dictionary.tamilcube.com")
 

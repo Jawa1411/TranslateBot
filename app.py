@@ -1,11 +1,11 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
+# from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from flask import Flask, request
 import telegram
 import re
 from credentials import bot_token, bot_user_name,URL
-from selenium.webdriver.chrome.options import Options
+# from selenium.webdriver.chrome.options import Options
 
 
 global bot
@@ -15,33 +15,24 @@ bot = telegram.Bot(token=TOKEN)
 
 app = Flask(__name__)
 
-def translate(word):
+# def translate(word):
     
-
-
-    options = Options()
-    options.binary_location = r"/usr/bin/firefox"
-    driver = webdriver.Firefox(options=options, executable_path="/usr/local/bin/geckodriver",)
     # firefox_binary = FirefoxBinary('/usr/bin/firefox')
     # driver = webdriver.Firefox(firefox_binary=firefox_binary)
     
-    driver.get("http://dictionary.tamilcube.com")
+    # driver.get("http://dictionary.tamilcube.com")
 
-    search_box = driver.find_element_by_id("name")
-    search_box.send_keys(word)
-    search_button = driver.find_element_by_id("Submit1")
-    search_button.click()
+    # search_box = driver.find_element_by_id("name")
+    # search_box.send_keys(word)
+    # search_button = driver.find_element_by_id("Submit1")
+    # search_button.click()
 
-    transword = driver.find_element_by_xpath("/html/body/div[3]/table/tbody/tr/td[2]/form/table[2]/tbody/tr/td[1]/div/table/tbody/tr[2]/td").text
-    return transword
+    # transword = driver.find_element_by_xpath("/html/body/div[3]/table/tbody/tr/td[2]/form/table[2]/tbody/tr/td[1]/div/table/tbody/tr[2]/td").text
+    # return transword
 @app.route('/{}'.format(TOKEN), methods=['POST'])
 def respond():
        # retrieve the message in JSON and then transform it to Telegram object
    update = telegram.Update.de_json(request.get_json(force=True), bot)
-
-
-#    update = bot.getUpdates()
-
    chat_id = update.message.chat.id
    msg_id = update.message.message_id
 
@@ -63,8 +54,8 @@ def respond():
        if(text):
             # word = text
     #    word = update.message.text.encode('utf-8').decode()
-            tw=translate(text)
-            bot.sendMessage(chat_id=chat_id, text=tw, reply_to_message_id=msg_id)
+            # tw=translate(text)
+            bot.sendMessage(chat_id=chat_id, text=text, reply_to_message_id=msg_id)
     
 
 

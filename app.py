@@ -1,6 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-# from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
+from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from flask import Flask, request
 import telegram
 import re
@@ -17,9 +17,9 @@ app = Flask(__name__)
 
 def translate(word):
     
-    # firefox_binary = FirefoxBinary('/usr/bin/firefox')
-    # driver = webdriver.Firefox(firefox_binary=firefox_binary)
-    driver = webdriver.Firefox()
+    firefox_binary = FirefoxBinary('/usr/bin/firefox')
+    driver = webdriver.Firefox(firefox_binary=firefox_binary)
+    # driver = webdriver.Firefox()
     driver.get("http://dictionary.tamilcube.com")
 
     search_box = driver.find_element_by_id("name")

@@ -1,6 +1,5 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from flask import Flask, request
 import telegram
 import re
@@ -16,9 +15,12 @@ bot = telegram.Bot(token=TOKEN)
 app = Flask(__name__)
 
 def translate(word):
-    
-    # firefox_binary = FirefoxBinary('/usr/bin/firefox')
-    driver = webdriver.Firefox(executable_path='/usr/local/bin/geckodriver')
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument('--disable-gpu')
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.binary_location = GOOGLE_CHROME_PATH
+
+    driver = webdriver.Chrome(execution_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
     # driver = webdriver.Firefox()
     driver.get("http://dictionary.tamilcube.com")
 

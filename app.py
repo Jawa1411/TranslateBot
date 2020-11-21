@@ -15,20 +15,21 @@ bot = telegram.Bot(token=TOKEN)
 
 app = Flask(__name__)
 
-# def translate(word):
+def translate(word):
     
-    # firefox_binary = FirefoxBinary('/usr/bin/firefox')
-    # driver = webdriver.Firefox(firefox_binary=firefox_binary)
+    firefox_binary = FirefoxBinary('/usr/bin/firefox')
+    driver = webdriver.Firefox(firefox_binary=firefox_binary)
     
-    # driver.get("http://dictionary.tamilcube.com")
+    driver.get("http://dictionary.tamilcube.com")
 
-    # search_box = driver.find_element_by_id("name")
-    # search_box.send_keys(word)
-    # search_button = driver.find_element_by_id("Submit1")
-    # search_button.click()
+    search_box = driver.find_element_by_id("name")
+    search_box.send_keys(word)
+    search_button = driver.find_element_by_id("Submit1")
+    search_button.click()
 
-    # transword = driver.find_element_by_xpath("/html/body/div[3]/table/tbody/tr/td[2]/form/table[2]/tbody/tr/td[1]/div/table/tbody/tr[2]/td").text
-    # return transword
+    transword = driver.find_element_by_xpath("/html/body/div[3]/table/tbody/tr/td[2]/form/table[2]/tbody/tr/td[1]/div/table/tbody/tr[2]/td").text
+    return transword
+
 @app.route('/{}'.format(TOKEN), methods=['POST'])
 def respond():
        # retrieve the message in JSON and then transform it to Telegram object
@@ -52,10 +53,10 @@ def respond():
        bot.sendMessage(chat_id=chat_id, text=bot_welcome, reply_to_message_id=msg_id)
    else :
        if(text):
-            # word = text
+            word = text
     #    word = update.message.text.encode('utf-8').decode()
-            # tw=translate(text)
-            bot.sendMessage(chat_id=chat_id, text=text, reply_to_message_id=msg_id)
+            tw=translate(text)
+            bot.sendMessage(chat_id=chat_id, text=tw, reply_to_message_id=msg_id)
     
 
 

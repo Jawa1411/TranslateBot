@@ -18,7 +18,7 @@ app = Flask(__name__)
 def translate(word):
     
     # firefox_binary = FirefoxBinary('/usr/bin/firefox')
-    driver = webdriver.Firefox(executable_path='/usr/bin/geckodriver')
+    driver = webdriver.Firefox(executable_path='/usr/local/bin/geckodriver')
     # driver = webdriver.Firefox()
     driver.get("http://dictionary.tamilcube.com")
 

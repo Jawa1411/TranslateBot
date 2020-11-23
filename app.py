@@ -2,12 +2,13 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from flask import Flask, request
 import telegram
+import os
 import re
 from credentials import bot_token, bot_user_name,URL
 # from selenium.webdriver.chrome.options import Options
 
-GOOGLE_CHROME_BIN = '/app/.apt/usr/bin/google_chrome'
-CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
+# GOOGLE_CHROME_BIN = '/app/.apt/usr/bin/google_chrome'
+# CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
 global bot
 global TOKEN
 TOKEN = bot_token
@@ -19,9 +20,9 @@ def translate(word):
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--disable-gpu')
     chrome_options.add_argument('--no-sandbox')
-    chrome_options.binary_location = GOOGLE_CHROME_BIN
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 
-    driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
     
     driver.get("http://dictionary.tamilcube.com")
 

@@ -6,7 +6,8 @@ import re
 from credentials import bot_token, bot_user_name,URL
 # from selenium.webdriver.chrome.options import Options
 
-
+GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google_chrome'
+CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
 global bot
 global TOKEN
 TOKEN = bot_token

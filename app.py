@@ -29,18 +29,20 @@ def translate(word):
     # chrome_options.binary_location = "GOOGLE_CHROME_BIN"
 
     # driver = webdriver.Chrome(executable_path="CHROMEDRIVER_PATH", chrome_options=chrome_options)
-    
-    driver.get("http://dictionary.tamilcube.com")
+    try:
+        driver.get("http://dictionary.tamilcube.com")
 
-    search_box = driver.find_element_by_id("name")
-    search_box.send_keys(word)
-    search_button = driver.find_element_by_id("Submit1")
-    search_button.click()
-    if(driver.find_element_by_xpath("/html/body/div[3]/table/tbody/tr/td[2]/form/table[2]/tbody/tr/td[1]/div/table/tbody/tr[2]/td").text):
-        transword = driver.find_element_by_xpath("/html/body/div[3]/table/tbody/tr/td[2]/form/table[2]/tbody/tr/td[1]/div/table/tbody/tr[2]/td").text
-        return transword
-    else:
-        return "No translation available"
+        search_box = driver.find_element_by_id("name")
+        search_box.send_keys(word)
+        search_button = driver.find_element_by_id("Submit1")
+        search_button.click()
+        try:
+            transword = driver.find_element_by_xpath("/html/body/div[3]/table/tbody/tr/td[2]/form/table[2]/tbody/tr/td[1]/div/table/tbody/tr[2]/td").text
+            return transword
+        except:
+            return ":( No translation available for this word. Try another word :)"
+    except:
+        return "Something went wrong :("
 
 @app.route('/{}'.format(TOKEN), methods=['POST'])
 def respond():

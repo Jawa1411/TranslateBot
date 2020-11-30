@@ -36,6 +36,7 @@ def translate(word):
         search_box.send_keys(word)
         search_button = driver.find_element_by_id("Submit1")
         search_button.click()
+        
         try:
             transword = driver.find_element_by_xpath("/html/body/div[3]/table/tbody/tr/td[2]/form/table[2]/tbody/tr/td[1]/div/table/tbody/tr[2]/td").text
             return transword
@@ -71,6 +72,7 @@ def respond():
             word = text
     #    word = update.message.text.encode('utf-8').decode()
             tw=translate(text)
+            bot.sendChatAction(chat_id=chat_id, action='typing')
             bot.sendMessage(chat_id=chat_id, text=tw, reply_to_message_id=msg_id)
     
 

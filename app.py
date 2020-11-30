@@ -43,7 +43,8 @@ def translate(word):
             return ":( No translation available for this word. Try another word :)"
     except:
         return "Something went wrong :("
-
+    finally:
+        driver.close()
 @app.route('/{}'.format(TOKEN), methods=['POST'])
 def respond():
        # retrieve the message in JSON and then transform it to Telegram object

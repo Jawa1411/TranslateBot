@@ -71,8 +71,8 @@ def respond():
        if(text):
             word = text
     #    word = update.message.text.encode('utf-8').decode()
-            tw=translate(text)
             bot.send_chat_action(chat_id=chat_id, action=telegram.ChatAction.TYPING)
+            tw=translate(text)            
             bot.sendMessage(chat_id=chat_id, text=tw, reply_to_message_id=msg_id)
     
 

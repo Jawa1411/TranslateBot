@@ -72,7 +72,7 @@ def respond():
             word = text
     #    word = update.message.text.encode('utf-8').decode()
             tw=translate(text)
-            bot.sendChatAction(chat_id=chat_id, action='typing')
+            bot.sendChatAction(chat_id=chat_id, action=ChatAction.typing)
             bot.sendMessage(chat_id=chat_id, text=tw, reply_to_message_id=msg_id)
     
 

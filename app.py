@@ -22,18 +22,13 @@ def translate(word):
     chrome_options.add_argument("--no-sandbox")
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
-
-    # chrome_options = webdriver.ChromeOptions()
-    # chrome_options.add_argument('--disable-gpu')
-    # chrome_options.add_argument('--no-sandbox')
-    # chrome_options.binary_location = "GOOGLE_CHROME_BIN"
-
-    # driver = webdriver.Chrome(executable_path="CHROMEDRIVER_PATH", chrome_options=chrome_options)
     try:
-        driver.get("http://www.google.com")
+        driver.get("https://www.google.com")
+        print("get into google")
         keys = word+" meaning in tamil"
-        search_box = driver.find_element_by_xpath("/html/body/div[2]/div[2]/form/div[2]/div[1]/div[1]/div/div[2]/input").send_keys(keys,Keys.ENTER)
-        
+        print("typed the word")
+        driver.find_element_by_xpath("/html/body/div[2]/div[2]/form/div[2]/div[1]/div[1]/div/div[2]/input").send_keys(keys,Keys.ENTER)
+        print("found serach box")
         try:
             transword = driver.find_element_by_xpath("/html/body/div[7]/div[2]/div[10]/div[1]/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/g-expandable-container/div/div/div[2]/div[3]/div/div[2]/div[1]/pre/span").text
             return transword

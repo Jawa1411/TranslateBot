@@ -30,15 +30,12 @@ def translate(word):
 
     # driver = webdriver.Chrome(executable_path="CHROMEDRIVER_PATH", chrome_options=chrome_options)
     try:
-        driver.get("http://dictionary.tamilcube.com")
+        driver.get("https://www.google.com")
 
-        search_box = driver.find_element_by_id("name")
-        search_box.send_keys(word)
-        search_button = driver.find_element_by_id("Submit1")
-        search_button.click()
+        search_box = driver.find_element_by_xpath("/html/body/div[2]/div[2]/form/div[2]/div[1]/div[1]/div/div[2]/input").send_keys(word+" meaning in tamil",Keys.ENTER)
         
         try:
-            transword = driver.find_element_by_xpath("/html/body/div[3]/table/tbody/tr/td[2]/form/table[2]/tbody/tr/td[1]/div/table/tbody/tr[2]/td").text
+            transword = driver.find_element_by_xpath("/html/body/div[7]/div[2]/div[10]/div[1]/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/g-expandable-container/div/div/div[2]/div[3]/div/div[2]/div[1]/pre/span").text
             return transword
         except:
             return ":( No translation available for this word. Try another word :)"

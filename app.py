@@ -30,7 +30,7 @@ def translate(word):
 
     # driver = webdriver.Chrome(executable_path="CHROMEDRIVER_PATH", chrome_options=chrome_options)
     try:
-        driver.get("https://www.google.com")
+        driver.get("http://www.google.com")
         keys = word+" meaning in tamil"
         search_box = driver.find_element_by_xpath("/html/body/div[2]/div[2]/form/div[2]/div[1]/div[1]/div/div[2]/input").send_keys(keys,Keys.ENTER)
         

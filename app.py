@@ -22,15 +22,14 @@ def translate(word):
     chrome_options.add_argument("--no-sandbox")
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
     try:
-        driver.get("https://www.google.com")
+        driver.get("http://dictionary.tamilcube.com/")
         # print(driver.page_source)
         # keys = word+" meaning in tamil"
         search= "/html/body/div[2]/div[2]/form/div[2]/div[1]/div[1]/div/div[2]/input"
-        search_box = driver.find_element_by_xpath(search)
-        print("found serach box")
-        search_box.send_keys(keys,Keys.ENTER)
-        print("key entered")
-        ans = "/html/body/div[7]/div[2]/div[10]/div[1]/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/div[1]/g-expandable-container/div/div/div[2]/div[3]/div/div[2]/div[1]/pre/span"
+        search_box = driver.find_element_by_id("name").send_keys(word,Keys.ENTER)
+        # print("found serach box")
+        # print("key entered")
+        ans = "/html/body/div[3]/table/tbody/tr/td[2]/form/table[2]/tbody/tr/td[1]/div/table/tbody/tr[2]/td"
         # search_button = driver.find_element_by_tag_name("center").click()
         try:
             transword = driver.find_element_by_xpath(ans).text

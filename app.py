@@ -24,7 +24,6 @@ def translate(word):
     try:
         driver.get("https://www.google.com")
         keys = word+" meaning in tamil"
-        print("typed the word")
         search= "/html/body/div[2]/div[2]/form/div[2]/div[1]/div[1]/div/div[2]/input"
         search_box = driver.find_element_by_xpath(search)
         print("found serach box")

@@ -24,9 +24,12 @@ def translate(word):
     try:
         driver.get("https://www.google.com")
         keys = word+" meaning in tamil"
-
-        search_box = driver.find_element_by_xpath("/html/body/div[2]/div[2]/form/div[2]/div[1]/div[1]/div/div[2]/input")
+        print("typed the word")
+        search= "/html/body/div[2]/div[2]/form/div[2]/div[1]/div[1]/div/div[2]/input"
+        search_box = driver.find_element_by_xpath(search)
+        print("found serach box")
         search_box.send_keys(keys,Keys.ENTER)
+        print("key entered")
         ans = "/html/body/div[7]/div[2]/div[10]/div[1]/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/div[1]/g-expandable-container/div/div/div[2]/div[3]/div/div[2]/div[1]/pre/span"
         # search_button = driver.find_element_by_tag_name("center").click()
         try:

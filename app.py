@@ -23,7 +23,8 @@ def translate(word):
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
     try:
         driver.get("https://www.google.com")
-        keys = word+" meaning in tamil"
+        print(driver.page_source)
+        # keys = word+" meaning in tamil"
         search= "/html/body/div[2]/div[2]/form/div[2]/div[1]/div[1]/div/div[2]/input"
         search_box = driver.find_element_by_xpath(search)
         print("found serach box")

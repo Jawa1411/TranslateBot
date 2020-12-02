@@ -23,21 +23,36 @@ def translate(word):
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
     try:
-        driver.get("https://www.google.com")
-        print("get into google")
-        keys = word+" meaning in tamil"
-        print("typed the word")
-        driver.find_element_by_xpath("/html/body/div[2]/div[2]/form/div[2]/div[1]/div[1]/div/div[2]/input").send_keys(keys,Keys.ENTER)
-        print("found serach box")
         try:
-            transword = driver.find_element_by_xpath("/html/body/div[7]/div[2]/div[10]/div[1]/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/g-expandable-container/div/div/div[2]/div[3]/div/div[2]/div[1]/pre/span").text
-            return transword
+            driver.get("https://www.google.com")
+            keys = word+" meaning in tamil"
+
+            search_box = driver.find_element_by_xpath("/html/body/div[2]/div[2]/form/div[2]/div[1]/div[1]/div/div[2]/input").send_keys(keys,Keys.ENTER)
+        # search_button = driver.find_element_by_tag_name("center").click()
+            try:
+                transword = driver.find_element_by_xpath("/html/body/div[7]/div[2]/div[10]/div[1]/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/g-expandable-container/div/div/div[2]/div[3]/div/div[2]/div[1]/pre/span").text
+                return transword
         except:
-            return ":( No translation available for this word. Try another word :)"
+            return "No translation available"
     except:
-        return "Something went wrong :("
+        return "Something went wrong"
     finally:
         driver.close()
+    #     driver.get("https://www.google.com")
+    #     print("get into google")
+    #     keys = word+" meaning in tamil"
+    #     print("typed the word")
+    #     driver.find_element_by_xpath("/html/body/div[2]/div[2]/form/div[2]/div[1]/div[1]/div/div[2]/input").send_keys(keys,Keys.ENTER)
+    #     print("found serach box")
+    #     try:
+    #         transword = driver.find_element_by_xpath("/html/body/div[7]/div[2]/div[10]/div[1]/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/g-expandable-container/div/div/div[2]/div[3]/div/div[2]/div[1]/pre/span").text
+    #         return transword
+    #     except:
+    #         return ":( No translation available for this word. Try another word :)"
+    # except:
+    #     return "Something went wrong :("
+    # finally:
+    #     driver.close()
 @app.route('/{}'.format(TOKEN), methods=['POST'])
 def respond():
        # retrieve the message in JSON and then transform it to Telegram object

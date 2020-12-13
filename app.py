@@ -4,14 +4,38 @@ from flask import Flask, request
 import telegram
 import os
 import re
-# from credentials import bot_token, bot_user_name,URL
+from credentials import bot_token, bot_user_name,URL
 
 
 global bot
 global TOKEN
-TOKEN = "1346377893:AAEH41x5nVsMmjgNT44MDoV2hZMCx20XJhI"
+TOKEN = bot_token
 bot = telegram.Bot(token=TOKEN)
 app = Flask(__name__)
+
+GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google_chrome'
+CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
+
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument('--disable-gpu')
+chrome_options.add_argument('--no-sandbox')
+chrome_options.binary_location = GOOGLE_CHROME_PATH
+
+def translate(word):
+    try:
+        driver = webdriver.Chrome(executable_path=os.environ.get('CHROMEDRIVER_PATH'), chrome_options=chrome_options)
+        driver.get("http://dictionary.tamilcube.com")
+        driver.find_element_by_id("name").send_keys(word)
+        driver.find_element_by_id("Submit1").click()
+        transword = driver.find_element_by_xpath("/html/body/div[3]/table/tbody/tr/td[2]/form/table[2]/tbody/tr/td[1]/div/table/tbody/tr[2]/td").text
+        return transword
+    except:
+        return "No meaning avaialable for this word"
+    finally:
+        return "Sorry, I am not available"
+
+
+
 
 @app.route('/{}'.format(TOKEN), methods=['POST'])
 def respond():
@@ -35,12 +59,12 @@ def respond():
        # send the welcoming message
        bot.sendMessage(chat_id=chat_id, text=bot_welcome, reply_to_message_id=msg_id)
    else :
-       if(text):
+        if(text):
             word = text
-    #    word = update.message.text.encode('utf-8').decode()
+                # word = update.message.text.encode('utf-8').decode()
             bot.send_chat_action(chat_id=chat_id, action=telegram.ChatAction.TYPING)
-            # tw=translate(text)            
-            bot.sendMessage(chat_id=chat_id, text=word, reply_to_message_id=msg_id)
+            tw=translate(word)            
+            bot.sendMessage(chat_id=chat_id, text=tw, reply_to_message_id=msg_id)        
     
 
 

@@ -25,8 +25,12 @@ def translate(word):
     try:
         driver = webdriver.Chrome(executable_path=os.environ.get('CHROMEDRIVER_PATH'), chrome_options=chrome_options)
         driver.get("http://dictionary.tamilcube.com")
-        driver.find_element_by_id("name").send_keys(word)
-        driver.find_element_by_id("Submit1").click()
+        # driver.find_element_by_id("name").send_keys(word)
+        # driver.find_element_by_id("Submit1").click()
+        search_box = driver.find_element_by_id("name")
+        search_box.send_keys(word)
+        search_button = driver.find_element_by_id("Submit1")
+        search_button.click()
         transword = driver.find_element_by_xpath("/html/body/div[3]/table/tbody/tr/td[2]/form/table[2]/tbody/tr/td[1]/div/table/tbody/tr[2]/td").text
         return transword
     except:

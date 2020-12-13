@@ -31,8 +31,6 @@ def translate(word):
         return transword
     except:
         return "No meaning avaialable for this word"
-    finally:
-        return "Sorry, I am not available"
 
 
 

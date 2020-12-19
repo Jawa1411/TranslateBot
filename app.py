@@ -38,7 +38,7 @@ def translate(word):
         # print("transword")
         return transword
     except:
-        return "No meaning avaialble for this word"
+        return "No meaning available for this word"
 
 
 

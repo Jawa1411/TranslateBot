@@ -46,12 +46,12 @@ def translate(word):
 @app.route('/{}'.format(TOKEN), methods=['POST'])
 def respond():
        # retrieve the message in JSON and then transform it to Telegram object
-   update = telegram.Update.de_json(request.get_json(force=True), bot)
-   chat_id = update.message.chat.id
-   msg_id = update.message.message_id
+    update = telegram.Update.de_json(request.get_json(force=True), bot)
+    chat_id = update.message.chat.id
+    msg_id = update.message.message_id
 
    # Telegram understands UTF-8, so encode text for unicode compatibility
-   try:
+    try:
         text = update.message.text.encode('utf-8').decode()
    # for debugging purposes only
         print("got text message :", text)      
@@ -90,7 +90,7 @@ def respond():
 #            # if things went wrong
 #            bot.sendMessage(chat_id=chat_id, text="There was a problem in the command you used, please enter correct command", reply_to_message_id=msg_id)
 
-   return 'ok'
+    return 'ok'
 
 @app.route('/setwebhook', methods=['GET', 'POST'])
 def set_webhook():

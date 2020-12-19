@@ -22,6 +22,7 @@ chrome_options.add_argument('--no-sandbox')
 chrome_options.binary_location = GOOGLE_CHROME_PATH
 
 def translate(word):
+    try:
         driver = webdriver.Chrome(executable_path=os.environ.get('CHROMEDRIVER_PATH'), chrome_options=chrome_options)
         driver.get("http://dictionary.tamilcube.com")
         print("website")
@@ -36,8 +37,8 @@ def translate(word):
         transword = driver.find_element_by_xpath("/html/body/div[3]/table/tbody/tr/td[2]/form/table[2]/tbody/tr/td[1]/div/table/tbody/tr[2]/td").text
         print("transword")
         return transword
-    # except:
-    #     return "No meaning avaialable for this word"
+    except:
+        return "No meaning avaialble for this word"
 
 
 
@@ -50,9 +51,13 @@ def respond():
    msg_id = update.message.message_id
 
    # Telegram understands UTF-8, so encode text for unicode compatibility
-   text = update.message.text.encode('utf-8').decode()
+   try:
+        text = update.message.text.encode('utf-8').decode()
    # for debugging purposes only
-   print("got text message :", text)
+        print("got text message :", text)
+   except:
+       print("text type pannuda mayiru")
+
    # the first time you chat with the bot AKA the welcoming message
    if text == "/start":
        # print the welcoming message

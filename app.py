@@ -13,7 +13,7 @@ TOKEN = bot_token
 bot = telegram.Bot(token=TOKEN)
 app = Flask(__name__)
 
-GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google_chrome'
+GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google-chrome'
 CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
 
 chrome_options = webdriver.ChromeOptions()

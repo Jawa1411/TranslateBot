@@ -56,7 +56,7 @@ def respond():
    # for debugging purposes only
         print("got text message :", text)
    except:
-       print("text type pannuda mayiru")
+       text = "text type pannuda mayiru"
 
    # the first time you chat with the bot AKA the welcoming message
    if text == "/start":

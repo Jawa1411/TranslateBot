@@ -22,23 +22,23 @@ chrome_options.add_argument('--no-sandbox')
 chrome_options.binary_location = GOOGLE_CHROME_PATH
 
 def translate(word):
-    # try:
+    try:
         driver = webdriver.Chrome(executable_path=os.environ.get('CHROMEDRIVER_PATH'), chrome_options=chrome_options)
         driver.get("http://dictionary.tamilcube.com")
-        print("website")
+        # print("website")
         # driver.find_element_by_id("name").send_keys(word)
         # driver.find_element_by_id("Submit1").click()
         search_box = driver.find_element_by_id("name")
-        print("name")
+        # print("name")
         search_box.send_keys(word)
         search_button = driver.find_element_by_id("Submit1")
-        print("submit")
+        # print("submit")
         search_button.click()
         transword = driver.find_element_by_xpath("/html/body/div[3]/table/tbody/tr/td[2]/form/table[2]/tbody/tr/td[1]/div/table/tbody/tr[2]/td").text
-        print("transword")
+        # print("transword")
         return transword
-    # except:
-        # return "No meaning avaialble for this word"
+    except:
+        return "No meaning avaialble for this word"
 
 
 
@@ -54,28 +54,27 @@ def respond():
    try:
         text = update.message.text.encode('utf-8').decode()
    # for debugging purposes only
-        print("got text message :", text)
-   except:
-       text = "text type pannuda mayiru"
+        print("got text message :", text)      
 
-   # the first time you chat with the bot AKA the welcoming message
-   if text == "/start":
-       # print the welcoming message
-       bot_welcome = """
-       Welcome to Translation bot, Enter the word to translate.
-       """
+        # the first time you chat with the bot AKA the welcoming message
+        if text == "/start":
+            # print the welcoming message
+            bot_welcome = """
+            Welcome to Translation bot, Enter the word to translate.
+            """
 
-    #    word = str(input("Enter the word to Translate"))
-       # send the welcoming message
-       bot.sendMessage(chat_id=chat_id, text=bot_welcome, reply_to_message_id=msg_id)
-   else :
-        if(text):
-            word = text
-                # word = update.message.text.encode('utf-8').decode()
-            bot.send_chat_action(chat_id=chat_id, action=telegram.ChatAction.TYPING)
-            tw=translate(word)            
-            bot.sendMessage(chat_id=chat_id, text=tw, reply_to_message_id=msg_id)        
-    
+            #    word = str(input("Enter the word to Translate"))
+            # send the welcoming message
+            bot.sendMessage(chat_id=chat_id, text=bot_welcome, reply_to_message_id=msg_id)
+        else :
+                if(text):
+                    word = text
+                        # word = update.message.text.encode('utf-8').decode()
+                    bot.send_chat_action(chat_id=chat_id, action=telegram.ChatAction.TYPING)
+                    tw=translate(word)            
+                    bot.sendMessage(chat_id=chat_id, text=tw, reply_to_message_id=msg_id)        
+    except:
+        bot.sendMessage(chat_id=chat_id, text="Please type text format only", reply_to_message_id=msg_id)
 
 
 #    else:
